@@ -12,12 +12,9 @@ int main(void){
 
     cout << "Hello, World!" << endl;
 
-    Node newNode("Faggot");
+   // Node newNode("Faggot");
 
     
-
-
-
 
     return 0;
 }

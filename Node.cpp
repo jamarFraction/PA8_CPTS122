@@ -50,3 +50,4 @@ void Node::SetRight(Node*& passedRight){
 
 
 }
+

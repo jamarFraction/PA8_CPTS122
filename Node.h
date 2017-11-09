@@ -7,6 +7,7 @@ class Node{
 
 protected:
 
+    
     // Data members:
     // # mData : std::string // # denotes protected
     // # mpLeft : Node *
