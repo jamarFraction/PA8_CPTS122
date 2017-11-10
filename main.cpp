@@ -1,5 +1,7 @@
-#include <iostream>
 #include "Node.h"
+#include "TransactionNode.h"
+
+#include <iostream>
 
 using std::cout;
 using std::cin;
@@ -12,9 +14,7 @@ int main(void){
 
     cout << "Hello, World!" << endl;
 
-   // Node newNode("Faggot");
-
-    
+    TransactionNode newNode;
 
     return 0;
 }

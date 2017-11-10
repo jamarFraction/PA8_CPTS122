@@ -10,6 +10,13 @@ Node::Node(string passedData, Node *dLeft, Node *dRight){
 
 }
 
+Node::~Node(){
+
+    delete(this->mpLeft);
+    delete(this->mpRight);
+
+}
+
 string Node::GetData(){
 
     return mData;

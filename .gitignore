@@ -32,3 +32,6 @@
 *.app
 PA8
 PA8.dSYM/Contents/Resources/DWARF/PA8
+.DS_Store
+.vscode/tasks.json
+PA8.dSYM/Contents/Resources/DWARF/PA8

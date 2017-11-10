@@ -1,17 +1,17 @@
+#ifndef Node_h_
+#define Node_h_
+
 #include <string>
+#include <iostream>
 
 using std::string;
-
+using std::cout;
+using std::endl;
+using std::cin;
 
 class Node{
 
 protected:
-
-    
-    // Data members:
-    // # mData : std::string // # denotes protected
-    // # mpLeft : Node *
-    // # mpRight : Node *
 
     string mData;
     Node *mpLeft;
@@ -21,6 +21,8 @@ public:
 
     //default constructor values
     Node(string passedData = "", Node *dLeft = nullptr, Node *dRight = nullptr);
+
+    virtual ~Node();
 
     //Getters
     string GetData();
@@ -38,3 +40,5 @@ public:
 
 
 };
+
+#endif
