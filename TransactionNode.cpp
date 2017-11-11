@@ -21,7 +21,7 @@ void TransactionNode::SetUnits(int passedUnits){
 
 }
 
-int TransactionNode::GetUnits(){
+int TransactionNode::GetUnits() const{
 
     //return the units
     return this->mUnits;

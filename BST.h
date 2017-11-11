@@ -28,7 +28,7 @@ class BST{
 public: 
 
     //default constructor
-    BST(Node *passedNode);
+    BST(Node *passedRootNode = nullptr);
 
     //Destructor
     ~BST();
@@ -44,25 +44,21 @@ public:
 
     void InOrderTraversal();
 
-    TransactionNode& FindSmallest();
+    TransactionNode& FindSmallest() const;
 
-    TransactionNode& FindLargest();
-
+    TransactionNode& FindLargest() const;
 
 
 
 private:
     
     Node *mpRoot;
-
-
-    void DestoryTree();
     
     void Insert(Node *&pTree, Node *&passedNode);
 
     void InOrderTraversal(Node *&pTree);
+
+    void DestroyTree();
     
-    };
-
-
+};
 #endif

@@ -23,7 +23,7 @@ public:
 
 
     //Getter
-    int GetUnits();
+    int GetUnits() const;
 
     //Overrides Node class virtual function
     void printData();
