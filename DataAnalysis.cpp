@@ -2,12 +2,6 @@
 
 using std::getline;
 
-DataAnalysis::DataAnalysis(){
-
-    //this->OpenInputStream();
-
-}
-
 void DataAnalysis::OpenInputStream(){
 
     this->mCsvStream.open("data.csv");
@@ -93,26 +87,38 @@ void DataAnalysis::ProcessFile(){
         newNode->SetData(tItem);
         newNode->SetUnits(tUnits);
 
+        //the Node will either be inserted into the proper function or deleted
+        //DUN DUN DUN!
+        InsertNodeInProperTree(newNode, tTransactionType);
+
+    }
+}
+
+void DataAnalysis::InsertNodeInProperTree(TransactionNode *&passedNode, string transactionType){
+
+    
         //check for where to insert the node
-        if (tTransactionType == "Purchased")
+        if (transactionType == "Purchased")
         {
 
             //insert into the purchased tree
-            mTreePurchased.Insert(newNode);
+            mTreePurchased.Insert(passedNode);
         }
-        else if (tTransactionType == "Sold")
+        else if (transactionType == "Sold")
         {
 
             //insert into the sold tree
-            mTreeSold.Insert(newNode);
+            mTreeSold.Insert(passedNode);
         }
         else
         {
 
             //delete whatever node was created
-            delete (newNode);
+            delete (passedNode);
         }
-    }
+
+
+
 }
 
 void DataAnalysis::RunAnalysis(){
@@ -128,26 +134,50 @@ void DataAnalysis::RunAnalysis(){
 
         //close the stream
         this->CloseInputStream();
-        
-    }
 
+        //Display the contents of both trees
+        //Sold tree
+        cout << "Sold Tree Contents:" << endl;
+        mTreeSold.InOrderTraversal();
+
+        //Purchased Tree
+        cout << "Purchased Tree Contents:" << endl;
+        mTreePurchased.InOrderTraversal();
+
+        //Display the data trends
+        this->DisplayDataTrends();
+    }
 
 }
 
+ void DataAnalysis::DisplayDataTrends(){
+    cout << "\n\n////////////////////////////" << endl;
+    cout << "DATA TRENDS:\n";
 
-    //testing
+    //worker!
+    TransactionNode currentNode;
 
-    // string test = "";
-    // while(!mCsvStream.eof()){
+    //Sold
+    currentNode = mTreeSold.FindSmallest();
 
-    //     //get the line and pop the back to get rid of the \r char at the end of the line
-    //     //'\n' isn't neccesarry, as no delimeter still returns the \r
-    //     getline(mCsvStream, test, '\n');
-    //     test.pop_back();
+    cout << "\n\nLeast Sold" << endl;
+    currentNode.printData();
 
-
-
-    // }
+    currentNode = mTreeSold.FindLargest();
+    cout << "\nGreatest Sold" << endl;
+    currentNode.printData();
 
 
+    //Purchased
+    currentNode = mTreePurchased.FindSmallest();
+
+    cout << "\n\nLeast Purchased" << endl;
+    currentNode.printData();
+
+    currentNode = mTreePurchased.FindLargest();
+    cout << "\nGreatest Purchased" << endl;
+    currentNode.printData();
+    cout << "////////////////////////////" << endl;
+
+ }
 

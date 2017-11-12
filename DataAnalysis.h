@@ -42,10 +42,15 @@ class DataAnalysis{
           
     //- A function that compares the transaction field and inserts the units and type
     // into the appropriate tree (mTreeSold or mTreePurchased) 
+    void InsertNodeInProperTree(TransactionNode *&passedNode, string transactionType);
+
+    //- A function that writes to the screen the trends we see in our tree; the function 
+    //must display the type and number of units that are least purchased and sold, and the
+    // most purchased and sold
+    void DisplayDataTrends();
 
   public:
-    DataAnalysis();
-    
+
     void RunAnalysis();
 
     

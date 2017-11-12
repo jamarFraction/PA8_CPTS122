@@ -42,6 +42,7 @@ void BST::InOrderTraversal(Node *&passedNode){
 
     //Print
     passedNode->printData();
+    cout << "\n";
     
     //Right
     if(passedNode->GetRight() != nullptr){
@@ -85,7 +86,7 @@ TransactionNode& BST::FindSmallest() const{
 
 
     //keep updating pointer to move to the right.. this Node will have the highest value
-    while(location->GetLeft() != nullptr){
+    while(location->GetRight() != nullptr){
 
         //update location
         location = (TransactionNode*) location->GetRight();

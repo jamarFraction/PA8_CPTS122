@@ -37,8 +37,6 @@ public:
     //Virtual printData
     virtual void printData() = 0;
 
-
-
 };
 
 #endif
