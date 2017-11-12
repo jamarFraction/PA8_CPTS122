@@ -28,19 +28,19 @@ class BST{
 public: 
 
     //default constructor
-    BST(Node *passedRootNode = nullptr);
+    BST(TransactionNode *passedRootNode = nullptr);
 
     //Destructor
     ~BST();
 
     //Getter
-    Node*& GetNode();
+    TransactionNode*& GetNode();
 
     //Setter
-    void SetNode(Node *&passedNode);
+    void SetNode(TransactionNode *&passedNode);
 
     //Public insert
-    void Insert(int passedUnits);
+    void Insert(TransactionNode *&passedNode);
 
     void InOrderTraversal();
 
@@ -54,7 +54,7 @@ private:
     
     Node *mpRoot;
     
-    void Insert(Node *&pTree, Node *&passedNode);
+    void Insert(Node *&pTree, TransactionNode *&passedNode);
 
     void InOrderTraversal(Node *&pTree);
 

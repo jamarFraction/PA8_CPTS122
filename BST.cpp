@@ -1,6 +1,6 @@
 #include "BST.h"
 
-BST::BST(Node *passedRootNode){
+BST::BST(TransactionNode *passedRootNode){
 
     //set the default root node to the passedRootNode/nullptr
     mpRoot = passedRootNode;
@@ -100,3 +100,33 @@ TransactionNode& BST::FindSmallest() const{
 
 }
 
+void BST::Insert(TransactionNode *&passedNode){
+
+    //pass the root of the tree and the passedNode to
+    //the recursive insert function
+    Insert(this->mpRoot, passedNode);
+
+}
+
+void BST::Insert(Node *&pTree, TransactionNode *&passedNode){
+
+
+    //base case.. AKA "insert here"
+    if(pTree == nullptr){
+
+        pTree = passedNode;
+
+    }else if(passedNode->GetUnits() < (dynamic_cast <TransactionNode*> (pTree)->GetUnits())){
+
+        //Insert left subtree
+        Insert(pTree->GetLeft(), passedNode);
+
+    }else if(passedNode->GetUnits() > (dynamic_cast <TransactionNode*> (pTree)->GetUnits())){
+
+        //Insert right subtree
+        Insert(pTree->GetRight(), passedNode);
+
+    }
+
+
+}

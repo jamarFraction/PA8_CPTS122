@@ -4,12 +4,11 @@ using std::getline;
 
 DataAnalysis::DataAnalysis(){
 
-    this->OpenInputStream();
+    //this->OpenInputStream();
 
 }
 
 void DataAnalysis::OpenInputStream(){
-
 
     this->mCsvStream.open("data.csv");
 
@@ -48,11 +47,11 @@ void DataAnalysis::ProcessLine(string &line, int &units, string &item, string &t
     //substring the line
     item = line.substr(0, pos);
 
-    //chop the line down to start from the old location of the first comma
+    //chop the line down to start from the old location of the second comma
     line = line.substr(pos + 1);
 
     //substring the line
-    transactionType = line.substr(pos + 1);
+    transactionType = line;
 
 
 }
@@ -67,58 +66,72 @@ int DataAnalysis::ConvertToInt(string someNumber){
 
 void DataAnalysis::ProcessFile(){
 
-    //check to make sure that the file is open
-    if(mCsvStream.is_open()){
+    //variables whos values will be set for new TransactionNodes
+    string tItem = "", tTransactionType = "";
+    int tUnits = 0;
 
-        //variables whos values will be set for new TransactionNodes
-        string tItem = "", tTransactionType = "";
-        int tUnits = 0;
+    //Declare and set the first line of the file.. this won't be of use
+    string currentLine = "";
 
-        //Declare and set the first line of the file.. this won't be of use
-        string currentLine = "";
+    getline(mCsvStream, currentLine);
 
+    //Loop through the entire file
+    while (!mCsvStream.eof())
+    {
+
+        //get the line and pop_back to get rid of the \r char at the end of the line
         getline(mCsvStream, currentLine);
+        currentLine.pop_back();
 
-        //Loop through the entire file
-        while(!mCsvStream.eof()){
+        //Create a new node
+        TransactionNode *newNode = new TransactionNode();
 
-            //get the line and pop_back to get rid of the \r char at the end of the line
-            getline(mCsvStream, currentLine);
-            currentLine.pop_back();
+        //Process the line, which will assign the necessary variables for a node
+        ProcessLine(currentLine, tUnits, tItem, tTransactionType);
 
+        //assign the line info to the node
+        newNode->SetData(tItem);
+        newNode->SetUnits(tUnits);
 
-            //Create a new node
-            TransactionNode *newNode = new TransactionNode();
+        //check for where to insert the node
+        if (tTransactionType == "Purchased")
+        {
 
-
-            //Process the line, which will assign the necessary variables for a node
-            ProcessLine(currentLine, tUnits, tItem, tTransactionType);
-
-
-            //assign the line info to the node
-            newNode->SetData(tItem);
-            newNode->SetUnits(tUnits);
-
-
-            //check for where to insert the node
-            if(tTransactionType == "Purchased"){
-
-                //insert into the purchased tree
-
-
-            }else if(tTransactionType == "Sold"){
-
-                //insert into the sold tree
-
-
-            }else{
-
-                //delete whatever node was created
-                delete(newNode);
-            }
+            //insert into the purchased tree
+            mTreePurchased.Insert(newNode);
         }
+        else if (tTransactionType == "Sold")
+        {
+
+            //insert into the sold tree
+            mTreeSold.Insert(newNode);
+        }
+        else
+        {
+
+            //delete whatever node was created
+            delete (newNode);
+        }
+    }
+}
+
+void DataAnalysis::RunAnalysis(){
+
+    //open the input stream
+    this->OpenInputStream();
+
+   
+    if(mCsvStream.is_open()){
+        
+        //Process the file
+        ProcessFile();
+
+        //close the stream
+        this->CloseInputStream();
         
     }
+
+
 }
 
 
