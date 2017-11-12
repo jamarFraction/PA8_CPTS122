@@ -4,7 +4,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "g++ -g main.cpp Node.cpp TransactionNode.cpp BST.cpp -o PA8",
+            "command": "g++ -g main.cpp Node.cpp TransactionNode.cpp BST.cpp DataAnalysis.cpp -o PA8",
             "group": {
                 "kind": "build",
                 "isDefault": true

@@ -14,8 +14,9 @@
 #ifndef DataAnalysis_h
 #define DataAnalysis_h
 
-#include "BST.h"
+
 #include <fstream>
+#include "BST.h"
 
 using std::ifstream;
 
@@ -26,8 +27,30 @@ class DataAnalysis{
     BST mTreePurchased;
     ifstream mCsvStream;
 
+    void OpenInputStream();
+    void CloseInputStream();
+
+    //A function that reads one line from the file and splits the line into units, type, and transaction fields
+    void ProcessLine(string &line, int &units, string &item, string &transactionType);
+
+    int ConvertToInt(string someNumber);
+
+    // - A function that loops until all lines are read from the file; 
+    //calls the function below, and then displays the current contents of both BSTs; 
+    //use inOrderTraversal () to display the trees
+    void ProcessFile();
+          
+    //- A function that compares the transaction field and inserts the units and type
+    // into the appropriate tree (mTreeSold or mTreePurchased) 
+
   public:
+    DataAnalysis();
+    
     void RunAnalysis();
+
+    
+
+
 };
 
 #endif

@@ -36,3 +36,5 @@ PA8.dSYM/Contents/Resources/DWARF/PA8
 .vscode/tasks.json
 .vscode/settings.json
 .vscode/tasks.json
+*.json
+PA8.dSYM/Contents/Resources/DWARF/PA8
